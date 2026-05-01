@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: eventgpt-scouting-app
+Version: 0.1.0
+Summary: Streamlit scouting engine UI on top of the eventGPT Modal service
+Requires-Python: >=3.11
+Requires-Dist: streamlit>=1.30
+Requires-Dist: httpx>=0.27
+Requires-Dist: openai>=1.40
+Requires-Dist: plotly>=5.22
+Requires-Dist: pandas>=2.0
+Requires-Dist: numpy>=1.24
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: modal>=1.0
+Provides-Extra: modal-image
+Requires-Dist: torch==2.4.1; extra == "modal-image"
+Requires-Dist: polars>=1.0; extra == "modal-image"
+Requires-Dist: pyarrow>=15; extra == "modal-image"
+Requires-Dist: pyyaml>=6; extra == "modal-image"
+Requires-Dist: pydantic>=2; extra == "modal-image"
+Requires-Dist: scikit-learn>=1.4; extra == "modal-image"
+Requires-Dist: hdbscan>=0.8.33; extra == "modal-image"
+Requires-Dist: umap-learn>=0.5; extra == "modal-image"
+Requires-Dist: fastapi>=0.110; extra == "modal-image"

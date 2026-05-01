@@ -1,0 +1,16 @@
+[theme]
+# Palette adapted from the Streamlit demo-ai-assistant template:
+# warm off-white background, charcoal text, rich purple primary accent.
+base = "light"
+primaryColor = "#6750A4"
+backgroundColor = "#FFFBFF"
+secondaryBackgroundColor = "#F3EDF7"
+textColor = "#1C1B1F"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = true
+
+[browser]
+gatherUsageStats = false

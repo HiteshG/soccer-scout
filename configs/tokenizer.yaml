@@ -1,0 +1,130 @@
+# Unified-vocab token layout for EventGPT.
+# Each attribute type owns a contiguous ID range. Bin counts are static;
+# quantile edges for delta_t and rOBV are computed at prepare time and
+# persisted into meta.pkl alongside train.bin / val.bin.
+
+version: 4
+# Phase 4 (2026-04-23): added formation_home and formation_away tokens to the
+# context block. Targets CS4 (role-transfer failure): with formation tokens
+# the model can detect "this player's modal role doesn't fit this formation's
+# expected position", which Haaland-into-CB-slot needs. Context grows 31 → 33,
+# vocab grows 2120 → 2140 for 20-slot formation range (15 formations + UNK +
+# 4 reserved).
+vocab_size: 2140
+block_size: 733          # 33 context tokens + 100 events * 7 sub-tokens
+context_len: 33
+max_events_per_episode: 100
+tokens_per_event: 7
+
+ranges:
+  specials:           [0, 4]
+  team_side:          [4, 6]
+  event_type:         [6, 38]
+  x_bin:              [38, 54]
+  y_bin:              [54, 66]
+  delta_t_bin:        [66, 106]     # 40 bins
+  outcome:            [106, 110]
+  rOBV_bin:           [110, 150]    # 40 bins
+  minute_bin:         [150, 175]
+  h_g:                [175, 186]
+  a_g:                [186, 197]
+  h_r:                [197, 203]
+  a_r:                [203, 209]
+  h_y:                [209, 215]
+  a_y:                [215, 221]
+  players:            [221, 2088]
+  score_diff:         [2088, 2095]
+  time_remaining_bin: [2095, 2115]
+  formation:          [2115, 2135]  # v4: 15 formations + UNK + 4 reserved
+
+specials:
+  BOS_EP: 0
+  EOS_EP: 1
+  PAD: 2
+  UNK_PLAYER: 3
+
+# Event-type vocabulary (27 VERSA actions + 4 admin). Index into the
+# event_type range.
+event_types:
+  - Pass
+  - Cross
+  - Clearance
+  - Pass Received
+  - Carry
+  - Take-On
+  - Shot
+  - Interception
+  - Recovery
+  - Tackle
+  - Duel
+  - Aerial Control
+  - Ball Received
+  - Block
+  - Kick-off
+  - Throw-in
+  - Free Kick
+  - Goal Kick
+  - Corner Kick
+  - Penalty Kick
+  - Catch
+  - Parry
+  - Goal
+  - Own Goal
+  - Offside
+  - Foul
+  - Pause
+  - SUB_ON
+  - SUB_OFF
+  - RED_CARD_EXIT
+  - UNMAPPED
+  - RESERVED
+
+outcomes:
+  - SUCCESS
+  - FAIL
+  - NEUTRAL
+  - NA
+
+# Pitch is centred at (0, 0) in our VERSA output: x ∈ [-52.5, 52.5], y ∈ [-34, 34].
+# Equal-width bins.
+x_bins: 16
+x_range: [-52.5, 52.5]
+y_bins: 12
+y_range: [-34, 34]
+
+delta_t_bins: 40   # quantile — edges computed at prepare time (doubled in v3)
+rOBV_bins: 40      # quantile — edges computed at prepare time (doubled in v3)
+
+minute_bin_width: 5   # 0..120 in 5-min buckets → 25 bins
+
+# Phase 3 context additions
+score_diff_cap: 3       # clamp h_g - a_g into [-3, +3] → 7 bins
+time_remaining_bins: 20 # quantile — edges computed at prepare time on (120 - minute)
+
+# Phase 4: formation vocabulary (stable — all 15 Impect-observed formations + UNK).
+# Ordered so UNK is last; new formations append (careful: token-id stable until then).
+formations:
+  - "4-1-3-2"
+  - "4-1-4-1"
+  - "4-2-2-2"
+  - "4-2-3-1"
+  - "4-3-3"
+  - "4-4-2 (diamond)"
+  - "4-4-2 (flat)"
+  - "5-1-2-2"
+  - "5-1-3-1"
+  - "5-2-1-2"
+  - "5-2-2-1"
+  - "5-3-2"
+  - "5-4-1 (diamond)"
+  - "5-4-1 (flat)"
+  - "UNKNOWN"
+  - "UNK_FORMATION"
+
+cap:
+  h_g: 10
+  a_g: 10
+  h_r: 5
+  a_r: 5
+  h_y: 5
+  a_y: 5
