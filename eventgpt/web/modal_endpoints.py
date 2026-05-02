@@ -62,7 +62,7 @@ VERSA_ROOT = "/versa/versa"
 
 
 @app.cls(
-    gpu="A10G",
+    gpu="T4",
     image=image,
     volumes={
         "/data": data_volume,

@@ -31,6 +31,32 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Dark green sidebar on a light main canvas — overrides the global light
+# theme just for the sidebar so the brand colour lives in the chrome.
+st.markdown(
+    """
+    <style>
+      section[data-testid="stSidebar"] {
+        background-color: #0F2C25 !important;
+      }
+      section[data-testid="stSidebar"] * {
+        color: #E8F0EC !important;
+      }
+      section[data-testid="stSidebar"] input,
+      section[data-testid="stSidebar"] textarea,
+      section[data-testid="stSidebar"] [data-baseweb="select"] > div {
+        background-color: #103A2A !important;
+        color: #E8F0EC !important;
+        border-color: rgba(232,240,236,0.20) !important;
+      }
+      section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] a {
+        color: #2EA37A !important;
+      }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # ---------- Session-state defaults -----------------------------------------
 

@@ -504,7 +504,7 @@ def qualitative_pitch_grid(
     cell_w, cell_h = PITCH_L / 4, PITCH_W / 4
 
     fig = go.Figure()
-    line = dict(color="rgba(232,240,236,0.55)", width=2)
+    line = dict(color="rgba(28,27,31,0.45)", width=2)
 
     for r in range(4):
         for c in range(4):
@@ -512,12 +512,12 @@ def qualitative_pitch_grid(
             x0, x1 = c * cell_w, (c + 1) * cell_w
             y0, y1 = r * cell_h, (r + 1) * cell_h
             fig.add_shape(type="rect", x0=x0, x1=x1, y0=y0, y1=y1,
-                          line=dict(color="rgba(232,240,236,0.20)", width=1),
+                          line=dict(color="rgba(28,27,31,0.18)", width=1),
                           fillcolor=fill, layer="below")
             fig.add_annotation(
                 x=(x0 + x1) / 2, y=(y0 + y1) / 2,
                 text=txt, showarrow=False,
-                font=dict(color="#E8F0EC", size=11, family="sans-serif"),
+                font=dict(color="#1C1B1F", size=11, family="sans-serif"),
             )
             # Invisible hover marker carrying the percentage.
             share_pct = f"{grid[r, c] * 100:.1f}% of touches · {txt} vs {role_label}"
@@ -541,10 +541,10 @@ def qualitative_pitch_grid(
                       y0=(PITCH_W - 18.32) / 2, y1=(PITCH_W + 18.32) / 2, line=line)
 
     fig.update_layout(
-        title=dict(text=title, y=0.96, font=dict(color="#E8F0EC", size=15)),
+        title=dict(text=title, y=0.96, font=dict(color="#1C1B1F", size=15)),
         height=380, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         margin=dict(l=20, r=20, t=70, b=50),
-        font=dict(color="#E8F0EC"),
+        font=dict(color="#1C1B1F"),
         xaxis=dict(range=[-2, PITCH_L + 2], visible=False, scaleanchor="y", scaleratio=1),
         yaxis=dict(range=[-2, PITCH_W + 2], visible=False),
         annotations=[
