@@ -43,11 +43,14 @@ def _endpoint_url(name: str) -> str:
     kebab = name.replace("_", "-")
     style = os.environ.get("MODAL_ENDPOINT_STYLE", "subdomain").lower()
     base = cfg.modal_url
+    # `modal serve` URLs have a `-dev` suffix between the endpoint name and
+    # `.modal.run`. Set MODAL_DEV=1 in .env when pointing at a serve session.
+    dev_suffix = "-dev" if os.environ.get("MODAL_DEV", "").lower() in ("1", "true", "yes") else ""
     if style == "path":
         return f"{base}/{kebab}"
     if base.endswith(".modal.run") or ".modal.run/" in base:
-        return base.replace(".modal.run", f"-{kebab}.modal.run", 1)
-    return f"{base}-{kebab}.modal.run"
+        return base.replace(".modal.run", f"-{kebab}{dev_suffix}.modal.run", 1)
+    return f"{base}-{kebab}{dev_suffix}.modal.run"
 
 
 def _client() -> httpx.Client:

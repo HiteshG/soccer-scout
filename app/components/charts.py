@@ -140,7 +140,7 @@ def category_mini_radar(
                     font=dict(color="#1C1B1F", size=11),
                     bgcolor="rgba(0,0,0,0)"),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(f"_{cat['blurb']}_ Compared to other {role_label}.")
 
 
@@ -203,6 +203,7 @@ def action_radar(
     baseline_std: dict[str, float] | None = None,
     baseline_label: str = "Role-typical baseline",
     title: str = "How this player compares to others in the same role",
+    key: str | None = None,
 ) -> None:
     """Diverging horizontal bar chart of action-mix z-scores.
 
@@ -261,7 +262,7 @@ def action_radar(
         yaxis=dict(autorange="reversed"),
         margin=dict(l=20, r=20, t=60, b=50),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch", key=key)
     st.caption(
         f"Compared to other {baseline_label.lower().replace('average ', '').replace(' player', 's')} "
         "in the league. Bars to the right = does this **more** than typical role peers; "
@@ -338,7 +339,7 @@ def action_radar_compare(
                     font=dict(color="#1C1B1F")),
         margin=dict(l=20, r=20, t=60, b=60),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "Both players measured against the same group of role peers. Where "
         "the two bars sit on opposite sides of the centre line is where "
@@ -462,7 +463,7 @@ def phase_bars(
         legend=dict(orientation="h", y=-0.3, x=0, font=dict(color="#1C1B1F")),
         margin=dict(l=10, r=10, t=50, b=20),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 # ---------- 2. Pitch heatmap ----------------------------------------------
@@ -555,7 +556,7 @@ def qualitative_pitch_grid(
                  text="Attacking third", font=dict(color="rgba(232,240,236,0.7)", size=11)),
         ],
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "Each zone labelled by how the player's touch share there compares "
         f"to other {role_label}: **Outstanding** is much above peers, "
@@ -564,7 +565,7 @@ def qualitative_pitch_grid(
     )
 
 
-def pitch_heatmap(spatial_zone: list[float], *, title: str = "Where they touch the ball") -> None:
+def pitch_heatmap(spatial_zone: list[float], *, title: str = "Where they touch the ball", key: str | None = None) -> None:
     """Real pitch shape with the 4×4 zone histogram overlaid as tinted
     rectangles. Pitch furniture (centre circle, penalty boxes, six-yard
     boxes, goals) is drawn so the orientation is unambiguous.
@@ -660,7 +661,7 @@ def pitch_heatmap(spatial_zone: list[float], *, title: str = "Where they touch t
         ],
         showlegend=False,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch", key=key)
     st.caption(
         "Heat = share of this player's on-ball touches in each pitch zone. "
         "Darker purple = more time on the ball there. Use this with the role "
@@ -731,7 +732,7 @@ def archetype_map(payload: dict, *, height: int = 600) -> None:
         margin=dict(l=10, r=10, t=10, b=10),
         xaxis=dict(visible=False), yaxis=dict(visible=False),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 # ---------- 5. Team-style similarity heatmap -------------------------------
@@ -756,7 +757,7 @@ def team_similarity_heatmap(teams_payload: dict, *, top_n: int = 25) -> None:
     fig.update_layout(
         height=520, margin=dict(l=10, r=10, t=10, b=10),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "Darker = the two teams play more alike (similar action mix and pitch zones). "
         "Labels are top-3 most-active player surnames per team."

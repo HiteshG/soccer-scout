@@ -761,7 +761,25 @@ def render(active_player_id: int | None) -> None:
                 st.session_state["scout_last_report"] = md
             md = st.session_state.get("scout_last_report")
             if md:
-                st.markdown(md)
+                # Split on section boundaries to inject real charts
+                overview_split = md.split("\n## Involvement", 1)
+                st.markdown(overview_split[0])
+                action_radar(
+                    profile.get("action_mix", {}),
+                    baseline=baseline_dict,
+                    baseline_std=baseline_std_dict,
+                    baseline_label=baseline_label,
+                    title=f"Style fingerprint vs {fam} peers" if baseline_dict else "Style fingerprint",
+                    key="ai_report_radar",
+                )
+                if len(overview_split) > 1:
+                    progression_split = (
+                        "\n## Involvement" + overview_split[1]
+                    ).split("\n## Stylistic peers", 1)
+                    st.markdown(progression_split[0])
+                    pitch_heatmap(profile.get("spatial_zone", []) or [], key="ai_report_heatmap")
+                    if len(progression_split) > 1:
+                        st.markdown("\n## Stylistic peers" + progression_split[1])
                 st.download_button(
                     "Download report (.md)", data=md,
                     file_name=f"scouting_{profile['name'].replace(' ', '_')}.md",

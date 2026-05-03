@@ -84,17 +84,10 @@ Hard rules — every output you produce must obey all of these:
 8. Format: clean Markdown. No emoji. No filler ("In conclusion…", "It
    is worth noting that…"). Short paragraphs of 2–4 sentences.
 
-9. Charts. When asked to include charts, embed them as Markdown image
-   placeholders with descriptive alt-text the host app will substitute,
-   e.g. `![Style fingerprint vs role peers](style-radar)` or
-   `![Pitch heatmap of touches](pitch-heatmap)`. Reference each chart
-   by name once in the prose so the layout has a chart caption to
-   anchor.
-
-10. Top-3 stylistic peers MUST be named explicitly with their current
-    club in parentheses. Do this once, in its own labelled section.
-    Format each line as: `**Name** (Current Club) — one-sentence
-    on the shared profile and the standout difference`.
+9. Top-3 stylistic peers MUST be named explicitly with their current
+   club in parentheses. Do this once, in its own labelled section.
+   Format each line as: `**Name** (Current Club) — one-sentence
+   on the shared profile and the standout difference`.
 """
 
 
@@ -309,8 +302,6 @@ is (cite a percentage), the 1–2 traits that make them stand out vs role
 peers, and the 1–2 traits where they sit below peers. End with the
 *implication sentence* — what kind of side this player is most useful to.
 
-![Style fingerprint vs role peers](style-radar)
-
 ## Involvement
 **Sub-headline** — one bold line, noun-phrase only.
 
@@ -333,8 +324,6 @@ implication sentence.
 creates chances — passes into the final third, ball carries through
 lines, take-ons, crosses. Reference the partnership requirement they
 impose. End with an implication.
-
-![Where they touch the ball](pitch-heatmap)
 
 ## Stylistic peers
 A short prose paragraph naming 2–3 supplied peers (with current clubs in
