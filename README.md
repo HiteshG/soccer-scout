@@ -4,6 +4,8 @@ A scouting + transfer-reasoning companion for football clubs, built on top
 of the [eventGPT](../eventGPT) event-level language model. The model lives
 on Modal; this repo is just the UI + LLM orchestration.
 
+https://www.linkedin.com/posts/hiteshgautam026_ai-sportsanalytics-football-ugcPost-7460666381492002816-2j_m
+
 ## Run locally
 
 1. Deploy the Modal service from the eventGPT repo:
